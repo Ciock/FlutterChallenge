@@ -19,89 +19,95 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
     final width = MediaQuery.of(context).size.width;
     final height = width / CustomRatioDimension.wide.value;
 
-    return SafeArea(
-      top: false,
-      child: Stack(
-        children: [
-          Obx(
-            () => ListView(
-              controller: controller.scrollController,
-              padding: EdgeInsets.zero,
-              children: [
-                _ImageHeader(breed: controller.breed),
-                if (controller.breed?.subBreeds.isNotEmpty == true) ...[
+    return Scaffold(
+      body: SafeArea(
+        top: false,
+        child: Stack(
+          children: [
+            Obx(
+              () => ListView(
+                controller: controller.scrollController,
+                padding: EdgeInsets.zero,
+                children: [
+                  Hero(
+                    tag: controller.breed?.name ?? '',
+                    child: _ImageHeader(breed: controller.breed),
+                  ),
+                  if (controller.breed?.subBreeds.isNotEmpty == true) ...[
+                    SizedBox(height: CustomSpaceDimension.xl.value),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: CustomSpaceDimension.lg.value,
+                      ),
+                      child: Text(
+                        'Sub breeds',
+                        style: CustomText.h2.style,
+                      ),
+                    ),
+                    SizedBox(height: CustomSpaceDimension.md.value),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: CustomSpaceDimension.lg.value,
+                      ),
+                      child: Wrap(
+                        spacing: CustomSpaceDimension.md.value,
+                        children: controller.breed!.subBreeds
+                            .map((e) => Chip(label: Text(e)))
+                            .toList(),
+                      ),
+                    ),
+                  ],
                   SizedBox(height: CustomSpaceDimension.xl.value),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: CustomSpaceDimension.lg.value,
                     ),
                     child: Text(
-                      'Sub breeds',
+                      'Gallery',
                       style: CustomText.h2.style,
                     ),
                   ),
-                  SizedBox(height: CustomSpaceDimension.md.value),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: CustomSpaceDimension.lg.value,
-                    ),
-                    child: Wrap(
-                      spacing: CustomSpaceDimension.md.value,
-                      children: controller.breed!.subBreeds
-                          .map((e) => Chip(label: Text(e)))
-                          .toList(),
-                    ),
-                  )
-                ],
-                SizedBox(height: CustomSpaceDimension.xl.value),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: CustomSpaceDimension.lg.value),
-                  child: Text(
-                    'Gallery',
-                    style: CustomText.h2.style,
-                  ),
-                ),
-                if (controller.breed != null)
-                  ...controller.breed!.images.map(
-                    (element) => Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: CustomSpaceDimension.lg.value,
-                        vertical: CustomSpaceDimension.md.value,
-                      ),
-                      child: CustomCard(
-                        child: Image(
-                          width: width,
-                          height: height,
-                          fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) =>
-                              ErrorImage(height: height),
-                          image: ResizeImage(
-                            NetworkImage(element),
-                            width: width.toInt(),
+                  if (controller.breed != null)
+                    ...controller.breed!.images.map(
+                      (element) => Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: CustomSpaceDimension.lg.value,
+                          vertical: CustomSpaceDimension.md.value,
+                        ),
+                        child: CustomCard(
+                          child: Image(
+                            width: width,
+                            height: height,
+                            fit: BoxFit.cover,
+                            errorBuilder: (_, __, ___) =>
+                                ErrorImage(height: height),
+                            image: ResizeImage(
+                              NetworkImage(element),
+                              width: width.toInt(),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Obx(
-              () => IgnorePointer(
-                ignoring: controller.smallHeaderOpacity.value < 1,
-                child: Opacity(
-                  opacity: controller.smallHeaderOpacity.value,
-                  child: _SmallHeader(breed: controller.breed),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Obx(
+                () => IgnorePointer(
+                  ignoring: controller.smallHeaderOpacity.value < 1,
+                  child: Opacity(
+                    opacity: controller.smallHeaderOpacity.value,
+                    child: _SmallHeader(breed: controller.breed),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
