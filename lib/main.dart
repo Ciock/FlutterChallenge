@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'pages/home/home.page.dart';
+import 'store/breed/breed.service.dart';
 
 void main() {
+  initServices();
   runApp(const MainApp());
+}
+
+void initServices() {
+  Get.put(BreedService());
 }
 
 class MainApp extends StatelessWidget {
