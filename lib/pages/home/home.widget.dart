@@ -22,6 +22,7 @@ class HomePageWidget extends GetView<HomePageController> {
                 child: Obx(
                   () => ListView.builder(
                     itemCount: controller.breeds.length,
+                    addAutomaticKeepAlives: true,
                     itemBuilder: (context, index) =>
                         _BreedCard(controller.breeds[index]),
                   ),
@@ -55,7 +56,14 @@ class _BreedCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius:
                         BorderRadius.circular(CustomRadiusDimension.md.value),
-                    child: Image.network(breed.image.value!),
+                    child: Image(
+                      image: ResizeImage(
+                        NetworkImage(breed.image.value!),
+                        width: Get.width.toInt(),
+                      ),
+                      width: Get.width,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 Text(
                   breed.name ?? '',
