@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../design/tokens/dimensions.token.dart';
 import '../../store/breed/breed.model.dart';
+import '../../store/breed/breed.service.dart';
 import 'home.controller.dart';
 
 part 'home.style.dart';
@@ -43,20 +44,26 @@ class _BreedCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(CustomRadiusDimension.md.value),
         ),
-        child: Stack(
-          children: [
-            ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(CustomRadiusDimension.md.value),
-              child: Image.network(
-                'https://images.dog.ceo/breeds/sheepdog-shetland/n02105855_9689.jpg',
-              ),
-            ),
-            Text(
-              breed.name ?? '',
-              style: const TextStyle(color: Colors.white),
-            ),
-          ],
+        child: Obx(
+          () {
+            if (breed.image.value == null) {
+              BreedService.to.updateBreedImage(breed);
+            }
+            return Stack(
+              children: [
+                if (breed.image.value != null)
+                  ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(CustomRadiusDimension.md.value),
+                    child: Image.network(breed.image.value!),
+                  ),
+                Text(
+                  breed.name ?? '',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            );
+          },
         ),
       );
 }

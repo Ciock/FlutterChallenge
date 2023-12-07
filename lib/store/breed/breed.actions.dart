@@ -9,4 +9,12 @@ extension BreedActions on BreedService {
         .map(BreedModel.fromGetBreedsResponse)
         .toList();
   }
+
+  Future<void> updateBreedImage(BreedModel breed) async {
+    if (breed.name == null) return;
+
+    final response = await _breedApi.tryGetBreedImage(breed.name!);
+
+    breed.image.value = response.data['message'];
+  }
 }

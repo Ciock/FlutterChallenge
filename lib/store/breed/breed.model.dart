@@ -1,6 +1,9 @@
+import 'package:get/get.dart';
+
 class BreedModel {
   String? name;
   List<String> subBreeds;
+  final image = RxnString();
 
   BreedModel({this.subBreeds = const []});
 
