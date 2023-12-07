@@ -82,6 +82,8 @@ class _BreedCard extends StatelessWidget {
                 children: [
                   if (breed.image.value != null)
                     Image(
+                      errorBuilder: (context, error, stackTrace) =>
+                          const _ErrorImage(),
                       image: ResizeImage(
                         NetworkImage(breed.image.value!),
                         width: Get.width.toInt(),
@@ -115,5 +117,29 @@ class _BreedCard extends StatelessWidget {
             );
           },
         ),
+      );
+}
+
+class _ErrorImage extends StatelessWidget {
+  const _ErrorImage();
+
+  @override
+  Widget build(BuildContext context) => Stack(
+        children: [
+          Image.asset(
+            'assets/404.png',
+            fit: BoxFit.cover,
+            height: Get.width / CustomRatioDimension.wide.value,
+          ),
+          Positioned(
+            top: CustomSpaceDimension.md.value,
+            left: 0,
+            right: 0,
+            child: const Text(
+              'Image not found',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
       );
 }
