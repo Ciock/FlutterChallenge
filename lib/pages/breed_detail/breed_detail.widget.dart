@@ -16,8 +16,9 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = width / CustomRatioDimension.wide.value;
+    final galleryImageWidth = MediaQuery.of(context).size.width;
+    final galleryImageHeight =
+        galleryImageWidth / CustomRatioDimension.wide.value;
 
     return Scaffold(
       body: SafeArea(
@@ -33,41 +34,19 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                     tag: controller.breed?.name ?? '',
                     child: _ImageHeader(breed: controller.breed),
                   ),
-                  if (controller.breed?.subBreeds.isNotEmpty == true) ...[
+                  if (controller.breed?.subBreeds.isNotEmpty == true)
+                    const _SubBreedsSection(),
+                  if (controller.breed?.images.isNotEmpty == true) ...[
                     SizedBox(height: CustomSpaceDimension.xl.value),
                     Padding(
                       padding: EdgeInsets.symmetric(
                         horizontal: CustomSpaceDimension.lg.value,
                       ),
                       child: Text(
-                        'Sub breeds',
+                        'Gallery',
                         style: CustomText.h2.style,
                       ),
                     ),
-                    SizedBox(height: CustomSpaceDimension.md.value),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: CustomSpaceDimension.lg.value,
-                      ),
-                      child: Wrap(
-                        spacing: CustomSpaceDimension.md.value,
-                        children: controller.breed!.subBreeds
-                            .map((e) => Chip(label: Text(e)))
-                            .toList(),
-                      ),
-                    ),
-                  ],
-                  SizedBox(height: CustomSpaceDimension.xl.value),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: CustomSpaceDimension.lg.value,
-                    ),
-                    child: Text(
-                      'Gallery',
-                      style: CustomText.h2.style,
-                    ),
-                  ),
-                  if (controller.breed != null)
                     ...controller.breed!.images.map(
                       (element) => Padding(
                         padding: EdgeInsets.symmetric(
@@ -76,19 +55,20 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                         ),
                         child: CustomCard(
                           child: Image(
-                            width: width,
-                            height: height,
+                            width: galleryImageWidth,
+                            height: galleryImageHeight,
                             fit: BoxFit.cover,
                             errorBuilder: (_, __, ___) =>
-                                ErrorImage(height: height),
+                                ErrorImage(height: galleryImageHeight),
                             image: ResizeImage(
                               NetworkImage(element),
-                              width: width.toInt(),
+                              width: galleryImageWidth.toInt(),
                             ),
                           ),
                         ),
                       ),
                     ),
+                  ],
                 ],
               ),
             ),
@@ -111,6 +91,34 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
       ),
     );
   }
+}
+
+class _SubBreedsSection extends GetView<BreedDetailPageController> {
+  const _SubBreedsSection();
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: CustomSpaceDimension.lg.value,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: CustomSpaceDimension.xl.value),
+            Text(
+              'Sub breeds',
+              style: CustomText.h2.style,
+            ),
+            SizedBox(height: CustomSpaceDimension.md.value),
+            Wrap(
+              spacing: CustomSpaceDimension.md.value,
+              children: controller.breed!.subBreeds
+                  .map((e) => Chip(label: Text(e)))
+                  .toList(),
+            ),
+          ],
+        ),
+      );
 }
 
 class _SmallHeader extends StatelessWidget {
