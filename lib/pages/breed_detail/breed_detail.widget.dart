@@ -26,6 +26,30 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
           padding: EdgeInsets.zero,
           children: [
             _ImageHeader(breed: controller.breed),
+            if (controller.breed?.subBreeds.isNotEmpty == true) ...[
+              SizedBox(height: CustomSpaceDimension.xl.value),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: CustomSpaceDimension.lg.value,
+                ),
+                child: Text(
+                  'Sub breeds',
+                  style: CustomText.h2.style,
+                ),
+              ),
+              SizedBox(height: CustomSpaceDimension.md.value),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: CustomSpaceDimension.lg.value,
+                ),
+                child: Wrap(
+                  spacing: CustomSpaceDimension.md.value,
+                  children: controller.breed!.subBreeds
+                      .map((e) => Chip(label: Text(e)))
+                      .toList(),
+                ),
+              )
+            ],
             SizedBox(height: CustomSpaceDimension.xl.value),
             Padding(
               padding: EdgeInsets.symmetric(
