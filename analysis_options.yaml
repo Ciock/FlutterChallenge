@@ -1,1 +1,32 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - avoid_catches_without_on_clauses
+    - avoid_catching_errors
+    - avoid_classes_with_only_static_members
+    - avoid_equals_and_hash_code_on_mutable_classes
+    - avoid_null_checks_in_equality_operators
+    - avoid_positional_boolean_parameters
+    - avoid_private_typedef_functions
+    - avoid_returning_this
+    - avoid_setters_without_getters
+    - avoid_types_on_closure_parameters
+    - directives_ordering
+    - lines_longer_than_80_chars
+    - omit_local_variable_types
+    - one_member_abstracts
+    - prefer_expression_function_bodies
+    - prefer_interpolation_to_compose_strings
+    - prefer_mixin
+    - prefer_relative_imports
+    - prefer_single_quotes
+    - slash_for_doc_comments
+    - type_annotate_public_apis
+    - unnecessary_lambdas
+    - use_setters_to_change_properties
+    - avoid_void_async
+    - require_trailing_commas
+
+analyzer:
+  exclude: [bricks/**]

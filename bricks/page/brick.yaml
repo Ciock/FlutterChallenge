@@ -1,0 +1,13 @@
+name: page
+description: Create a page file structure.
+
+version: 0.1.0+1
+
+environment:
+  mason: '>=0.1.0-dev.41 <0.1.0'
+
+vars:
+  name:
+    type: string
+    description: Page name
+    prompt: What is the page name?

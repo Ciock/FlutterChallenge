@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'pages/home/home.page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -8,13 +11,8 @@ class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => GetMaterialApp(
+        getPages: [homePage],
+        initialRoute: homeRoute,
+      );
 }
