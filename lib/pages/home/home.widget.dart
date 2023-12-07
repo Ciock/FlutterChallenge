@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../design/atoms/card.widget.dart';
+import '../../design/components/error_image.widget.dart';
+import '../../design/components/search_bar.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
@@ -14,47 +17,36 @@ class HomePageWidget extends GetView<HomePageController> {
 
   @override
   Widget build(BuildContext context) => SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(CustomSpaceDimension.lg.value),
-              child: Text('Breeds', style: CustomText.h1.style),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: CustomSpaceDimension.lg.value,
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: CustomSpaceDimension.lg.value),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: CustomSpaceDimension.md.value),
+              Text('Breeds', style: CustomText.h1.style),
+              SizedBox(height: CustomSpaceDimension.lg.value),
+              CustomSearchBar(controller: controller),
+              Padding(
+                padding: EdgeInsets.only(top: CustomSpaceDimension.lg.value),
+                child: const Divider(height: 0),
               ),
-              child: SearchBar(
-                controller: controller.searchController,
-                textStyle: MaterialStateProperty.all(CustomText.body.style),
-                hintText: 'Search...',
-                leading: const Icon(Icons.search),
-                elevation: const MaterialStatePropertyAll(3),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: CustomSpaceDimension.lg.value,
-                right: CustomSpaceDimension.lg.value,
-                top: CustomSpaceDimension.lg.value,
-              ),
-              child: const Divider(height: 0),
-            ),
-            Expanded(
-              child: Obx(
-                () => ListView.separated(
-                  padding: EdgeInsets.all(CustomSpaceDimension.lg.value),
-                  itemCount: controller.filteredBreeds.length,
-                  addAutomaticKeepAlives: true,
-                  itemBuilder: (context, index) =>
-                      _BreedCard(controller.filteredBreeds[index]),
-                  separatorBuilder: (context, index) =>
-                      SizedBox(height: CustomSpaceDimension.lg.value),
+              Expanded(
+                child: Obx(
+                  () => ListView.separated(
+                    padding: EdgeInsets.symmetric(
+                      vertical: CustomSpaceDimension.lg.value,
+                    ),
+                    itemCount: controller.filteredBreeds.length,
+                    itemBuilder: (context, index) =>
+                        _BreedCard(controller.filteredBreeds[index]),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(height: CustomSpaceDimension.lg.value),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
 }
@@ -65,81 +57,58 @@ class _BreedCard extends StatelessWidget {
   const _BreedCard(this.breed);
 
   @override
-  Widget build(BuildContext context) => Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(CustomRadiusDimension.md.value),
-        ),
+  Widget build(BuildContext context) => CustomCard(
         child: Obx(
           () {
             if (breed.image.value == null) {
               BreedService.to.updateBreedImage(breed);
             }
-            return ClipRRect(
-              borderRadius:
-                  BorderRadius.circular(CustomRadiusDimension.md.value),
-              child: Stack(
-                children: [
-                  if (breed.image.value != null)
-                    Image(
-                      errorBuilder: (context, error, stackTrace) =>
-                          const _ErrorImage(),
-                      image: ResizeImage(
-                        NetworkImage(breed.image.value!),
-                        width: Get.width.toInt(),
-                      ),
-                      width: Get.width,
-                      height: Get.width / CustomRatioDimension.wide.value,
-                      fit: BoxFit.cover,
-                    ),
-                  Container(
-                    height: Get.width / CustomRatioDimension.wide.value,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        colors: [Colors.black, Colors.transparent],
-                        stops: [0, 0.2],
-                      ),
+            final imageWidth = MediaQuery.of(context).size.width;
+            final imageHeight = imageWidth / CustomRatioDimension.wide.value;
+
+            return Stack(
+              children: [
+                if (breed.image.value != null)
+                  Image(
+                    width: imageWidth,
+                    height: imageHeight,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) =>
+                        ErrorImage(height: imageHeight),
+                    image: ResizeImage(
+                      NetworkImage(breed.image.value!),
+                      width: imageWidth.toInt(),
                     ),
                   ),
-                  Positioned(
-                    bottom: CustomSpaceDimension.lg.value,
-                    left: CustomSpaceDimension.lg.value,
-                    child: Text(
-                      breed.name?.capitalize ?? '',
-                      style:
-                          CustomText.body.style.copyWith(color: Colors.white),
-                    ),
+                const _Gradient(),
+                Positioned(
+                  bottom: CustomSpaceDimension.lg.value,
+                  left: CustomSpaceDimension.lg.value,
+                  child: Text(
+                    breed.name?.capitalize ?? '',
+                    style: CustomText.body.style.copyWith(color: Colors.white),
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           },
         ),
       );
 }
 
-class _ErrorImage extends StatelessWidget {
-  const _ErrorImage();
+class _Gradient extends StatelessWidget {
+  const _Gradient();
 
   @override
-  Widget build(BuildContext context) => Stack(
-        children: [
-          Image.asset(
-            'assets/404.png',
-            fit: BoxFit.cover,
-            height: Get.width / CustomRatioDimension.wide.value,
+  Widget build(BuildContext context) => Container(
+        height: Get.width / CustomRatioDimension.wide.value,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [Colors.black, Colors.transparent],
+            stops: [0, 0.2],
           ),
-          Positioned(
-            top: CustomSpaceDimension.md.value,
-            left: 0,
-            right: 0,
-            child: const Text(
-              'Image not found',
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
+        ),
       );
 }
