@@ -4,6 +4,7 @@ class BreedModel {
   String? name;
   List<String> subBreeds;
   final image = RxnString();
+  final images = RxList<String>();
 
   BreedModel({this.subBreeds = const []});
 

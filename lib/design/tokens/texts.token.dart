@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dimensions.token.dart';
 
 enum CustomText {
-  h1(fontSize: CustomFontDimension.xl, fontWeight: FontWeight.bold),
+  h1(fontSize: CustomFontDimension.xxl, fontWeight: FontWeight.bold),
+  h2(fontSize: CustomFontDimension.xl, fontWeight: FontWeight.bold),
   body(fontSize: CustomFontDimension.lg),
   caption(fontSize: CustomFontDimension.md, fontWeight: FontWeight.normal);
 

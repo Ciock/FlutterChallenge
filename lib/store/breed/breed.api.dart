@@ -6,4 +6,7 @@ class BreedApi {
 
   Future<Response> tryGetBreedImage(String breedName) =>
       Dio().get('https://dog.ceo/api/breed/$breedName/images/random');
+
+  Future<Response> tryGetBreedImages(String breedName) =>
+      Dio().get('https://dog.ceo/api/breed/$breedName/images');
 }

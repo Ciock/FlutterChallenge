@@ -31,8 +31,11 @@ enum CustomFontDimension {
   /// 16
   lg(16),
 
+  /// 16
+  xl(24),
+
   /// 32
-  xl(32);
+  xxl(32);
 
   final double value;
 
@@ -73,7 +76,10 @@ enum CustomSpaceDimension {
   md(8),
 
   /// 16
-  lg(16);
+  lg(16),
+
+  /// 32
+  xl(32);
 
   final double value;
 
