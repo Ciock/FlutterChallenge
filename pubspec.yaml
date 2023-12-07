@@ -1,5 +1,5 @@
 name: deliveristo_interview
-description: "A new Flutter project."
+description: 'A new Flutter project.'
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,6 +9,7 @@ environment:
 dependencies:
   dio: ^5.4.0
   get: ^4.6.6
+  google_fonts: ^6.1.0
   flutter:
     sdk: flutter
 

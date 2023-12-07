@@ -29,7 +29,10 @@ enum CustomFontDimension {
   md(14),
 
   /// 16
-  lg(16);
+  lg(16),
+
+  /// 32
+  xl(32);
 
   final double value;
 
