@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../design/atoms/card.widget.dart';
+import '../../design/atoms/gradient.widget.dart';
 import '../../design/components/error_image.widget.dart';
 import '../../design/components/search_bar.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
 import '../../store/breed/breed.service.dart';
+import '../breed_detail/breed_detail.page.dart';
 import 'home.controller.dart';
 
 part 'home.style.dart';
@@ -57,57 +59,47 @@ class _BreedCard extends StatelessWidget {
   const _BreedCard(this.breed);
 
   @override
-  Widget build(BuildContext context) => CustomCard(
-        child: Obx(
-          () {
-            if (breed.image.value == null) {
-              BreedService.to.updateBreedImage(breed);
-            }
-            final imageWidth = MediaQuery.of(context).size.width;
-            final imageHeight = imageWidth / CustomRatioDimension.wide.value;
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => Get.toNamed(
+          breedDetailRoute,
+          parameters: {'breed_name': breed.name ?? ''},
+        ),
+        child: CustomCard(
+          child: Obx(
+            () {
+              if (breed.image.value == null) {
+                BreedService.to.updateBreedImage(breed);
+              }
+              final imageWidth = MediaQuery.of(context).size.width;
+              final imageHeight = imageWidth / CustomRatioDimension.wide.value;
 
-            return Stack(
-              children: [
-                if (breed.image.value != null)
-                  Image(
-                    width: imageWidth,
-                    height: imageHeight,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) =>
-                        ErrorImage(height: imageHeight),
-                    image: ResizeImage(
-                      NetworkImage(breed.image.value!),
-                      width: imageWidth.toInt(),
+              return Stack(
+                children: [
+                  if (breed.image.value != null)
+                    Image(
+                      width: imageWidth,
+                      height: imageHeight,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) =>
+                          ErrorImage(height: imageHeight),
+                      image: ResizeImage(
+                        NetworkImage(breed.image.value!),
+                        width: imageWidth.toInt(),
+                      ),
+                    ),
+                  GradientBox(height: imageHeight),
+                  Positioned(
+                    bottom: CustomSpaceDimension.lg.value,
+                    left: CustomSpaceDimension.lg.value,
+                    child: Text(
+                      breed.name?.capitalize ?? '',
+                      style:
+                          CustomText.body.style.copyWith(color: Colors.white),
                     ),
                   ),
-                const _Gradient(),
-                Positioned(
-                  bottom: CustomSpaceDimension.lg.value,
-                  left: CustomSpaceDimension.lg.value,
-                  child: Text(
-                    breed.name?.capitalize ?? '',
-                    style: CustomText.body.style.copyWith(color: Colors.white),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      );
-}
-
-class _Gradient extends StatelessWidget {
-  const _Gradient();
-
-  @override
-  Widget build(BuildContext context) => Container(
-        height: Get.width / CustomRatioDimension.wide.value,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            colors: [Colors.black, Colors.transparent],
-            stops: [0, 0.2],
+                ],
+              );
+            },
           ),
         ),
       );
