@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'design/tokens/texts.token.dart';
 import 'pages/home/home.page.dart';
 import 'store/breed/breed.service.dart';
 
@@ -20,5 +21,11 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         getPages: [homePage],
         initialRoute: homeRoute,
+        builder: (context, child) => Scaffold(
+          body: DefaultTextStyle.merge(
+            style: CustomText.body.style,
+            child: child ?? Container(),
+          ),
+        ),
       );
 }
