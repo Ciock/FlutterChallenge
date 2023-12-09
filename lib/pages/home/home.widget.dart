@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../design/atoms/card.widget.dart';
 import '../../design/atoms/gradient.widget.dart';
@@ -19,58 +20,103 @@ class HomePageWidget extends GetView<HomePageController> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: CustomSpaceDimension.lg.value),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: CustomSpaceDimension.md.value),
-                Text('Breeds', style: CustomText.h1.style),
-                SizedBox(height: CustomSpaceDimension.lg.value),
-                CustomSearchBar(controller: controller.searchController),
-                Padding(
-                  padding: EdgeInsets.only(top: CustomSpaceDimension.lg.value),
-                  child: const Divider(height: 0),
+        body: Stack(
+          children: [
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: CustomSpaceDimension.lg.value,
                 ),
-                Obx(
-                  () {
-                    if (controller.breeds.isEmpty) {
-                      return Center(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.all(CustomSpaceDimension.xl.value),
-                          child: const CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                    if (controller.filteredBreeds.isEmpty) {
-                      return Center(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.all(CustomSpaceDimension.xl.value),
-                          child: const Text('No breed found'),
-                        ),
-                      );
-                    }
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: CustomSpaceDimension.md.value),
+                    Text('Breeds', style: CustomText.h1.style),
+                    SizedBox(height: CustomSpaceDimension.lg.value),
+                    CustomSearchBar(controller: controller.searchController),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: CustomSpaceDimension.lg.value),
+                      child: const Divider(height: 0),
+                    ),
+                    Obx(
+                      () {
+                        if (controller.breeds.isEmpty) {
+                          return Center(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.all(CustomSpaceDimension.xl.value),
+                              child: const CircularProgressIndicator(),
+                            ),
+                          );
+                        }
+                        if (controller.filteredBreeds.isEmpty) {
+                          return Center(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.all(CustomSpaceDimension.xl.value),
+                              child: const Text('No breed found'),
+                            ),
+                          );
+                        }
 
-                    return Expanded(
-                      child: ListView.separated(
-                        padding: EdgeInsets.symmetric(
-                          vertical: CustomSpaceDimension.lg.value,
-                        ),
-                        itemCount: controller.filteredBreeds.length,
-                        itemBuilder: (context, index) =>
-                            _BreedCard(controller.filteredBreeds[index]),
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: CustomSpaceDimension.lg.value),
-                      ),
-                    );
-                  },
+                        return Expanded(
+                          child: ListView.separated(
+                            padding: EdgeInsets.symmetric(
+                              vertical: CustomSpaceDimension.lg.value,
+                            ),
+                            itemCount: controller.filteredBreeds.length,
+                            itemBuilder: (context, index) =>
+                                _BreedCard(controller.filteredBreeds[index]),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: CustomSpaceDimension.lg.value),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
+            const Center(child: _WelcomeAnimation()),
+          ],
+        ),
+      );
+}
+
+class _WelcomeAnimation extends StatefulWidget {
+  const _WelcomeAnimation();
+
+  @override
+  State<_WelcomeAnimation> createState() => _WelcomeAnimationState();
+}
+
+class _WelcomeAnimationState extends State<_WelcomeAnimation> {
+  double opacity = 1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      setState(() {
+        opacity = 0;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => IgnorePointer(
+        ignoring: opacity < 1,
+        child: AnimatedOpacity(
+          opacity: opacity,
+          duration: const Duration(milliseconds: 1500),
+          curve: Curves.decelerate,
+          child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Lottie.asset('assets/HomeAnimation.json'),
           ),
         ),
       );
