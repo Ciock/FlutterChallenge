@@ -30,6 +30,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: const Color(0xfff8f0e5),
+          colorScheme: const ColorScheme.light().copyWith(
+              surface: const Color(0xfff4e9d6),
+              surfaceTint: const Color(0xfff4e3c8)),
+        ),
         getPages: [homePage, breedDetailPage, subBreedDetailPage, galleryPage],
         initialRoute: homeRoute,
         builder: (context, child) => Scaffold(
