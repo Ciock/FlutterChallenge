@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 
-import '../../design/atoms/card.widget.dart';
-import '../../design/atoms/gradient.widget.dart';
-import '../../design/components/dog_image.widget.dart';
 import '../../design/components/search_bar.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
-import '../../store/breed/breed.model.dart';
-import '../../store/breed/breed.service.dart';
-import '../breed_detail/breed_detail.page.dart';
+import 'components/breed_card.widget.dart';
+import 'components/welcome_animation.widget.dart';
 import 'home.controller.dart';
 
 part 'home.style.dart';
@@ -58,7 +53,7 @@ class HomePageWidget extends GetView<HomePageController> {
                             ),
                             itemCount: controller.filteredBreeds.length,
                             itemBuilder: (context, index) =>
-                                _BreedCard(controller.filteredBreeds[index]),
+                                BreedCard(controller.filteredBreeds[index]),
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: CustomSpaceDimension.lg.value),
                           ),
@@ -69,100 +64,8 @@ class HomePageWidget extends GetView<HomePageController> {
                 ),
               ),
             ),
-            const Center(child: _WelcomeAnimation()),
+            const Center(child: WelcomeAnimation()),
           ],
-        ),
-      );
-}
-
-class _WelcomeAnimation extends StatefulWidget {
-  const _WelcomeAnimation();
-
-  @override
-  State<_WelcomeAnimation> createState() => _WelcomeAnimationState();
-}
-
-class _WelcomeAnimationState extends State<_WelcomeAnimation> {
-  double opacity = 1;
-
-  @override
-  void initState() {
-    super.initState();
-    setAnimationRemove();
-  }
-
-  Future setAnimationRemove() async {
-    // show animation until breed list is retrieved.
-    // show animation for at least 2 seconds
-    await Future.wait([
-      BreedService.to.breeds$.first,
-      Future.delayed(const Duration(seconds: 2)),
-    ]);
-
-    setState(() {
-      opacity = 0;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) => IgnorePointer(
-        ignoring: opacity < 1,
-        child: AnimatedOpacity(
-          opacity: opacity,
-          duration: const Duration(milliseconds: 1500),
-          curve: Curves.decelerate,
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Lottie.asset('assets/HomeAnimation.json'),
-          ),
-        ),
-      );
-}
-
-class _BreedCard extends StatelessWidget {
-  final BreedModel breed;
-
-  const _BreedCard(this.breed);
-
-  @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () => Get.toNamed(
-          breedDetailRoute,
-          parameters: {BreedDetailParameters.breed.name: breed.id ?? ''},
-        ),
-        child: Hero(
-          tag: breed.name,
-          child: CustomCard(
-            child: Obx(
-              () {
-                if (breed.image == null) {
-                  BreedService.to.updateBreedImage(breed);
-                }
-                final imageWidth = MediaQuery.of(context).size.width;
-                final imageHeight =
-                    imageWidth / CustomRatioDimension.wide.value;
-
-                return Stack(
-                  children: [
-                    if (breed.image != null)
-                      DogImage(width: imageWidth, url: breed.image!),
-                    GradientBox(height: imageHeight),
-                    Positioned(
-                      bottom: CustomSpaceDimension.lg.value,
-                      left: CustomSpaceDimension.lg.value,
-                      child: Text(
-                        breed.name,
-                        style:
-                            CustomText.body.style.copyWith(color: Colors.white),
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ),
         ),
       );
 }

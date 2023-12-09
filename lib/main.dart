@@ -30,6 +30,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: const Color(0xfff8f0e5),
           colorScheme: const ColorScheme.light().copyWith(
