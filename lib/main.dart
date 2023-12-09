@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'design/tokens/texts.token.dart';
 import 'pages/breed_detail/breed_detail.page.dart';
 import 'pages/home/home.page.dart';
+import 'pages/sub_breed_detail/sub_breed_detail.page.dart';
 import 'store/breed/breed.service.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-        getPages: [homePage, breedDetailPage],
+        getPages: [homePage, breedDetailPage, subBreedDetailPage],
         initialRoute: homeRoute,
         builder: (context, child) => Scaffold(
           body: DefaultTextStyle.merge(

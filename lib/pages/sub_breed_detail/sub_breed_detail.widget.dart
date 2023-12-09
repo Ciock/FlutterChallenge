@@ -7,13 +7,12 @@ import '../../design/components/image_header.widget.dart';
 import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
-import '../sub_breed_detail/sub_breed_detail.page.dart';
-import 'breed_detail.controller.dart';
+import 'sub_breed_detail.controller.dart';
 
-part 'breed_detail.style.dart';
+part 'sub_breed_detail.style.dart';
 
-class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
-  const BreedDetailPageWidget({super.key});
+class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
+  const SubBreedDetailPageWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +28,11 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                 controller: controller.scrollController,
                 padding: EdgeInsets.zero,
                 children: [
-                  Hero(
-                    tag: controller.breed?.name ?? '',
-                    child: ImageHeader(
-                      imageUrl: controller.breed?.image.value,
-                      title: controller.breed?.name ?? '',
-                    ),
+                  ImageHeader(
+                    imageUrl: controller.subBreed?.image.value,
+                    title: controller.subBreed?.name ?? '',
                   ),
-                  if (controller.breed?.subBreeds.isNotEmpty == true)
-                    const _SubBreedsSection(),
-                  if (controller.breed?.images.isNotEmpty == true) ...[
+                  if (controller.subBreed?.images.isNotEmpty == true) ...[
                     Padding(
                       padding: EdgeInsets.only(
                         left: CustomSpaceDimension.lg.value,
@@ -47,7 +41,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                       ),
                       child: Text('Gallery', style: CustomText.h2.style),
                     ),
-                    ...controller.breed!.images.map(
+                    ...controller.subBreed!.images.map(
                       (url) => Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: CustomSpaceDimension.lg.value,
@@ -71,7 +65,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                   ignoring: controller.smallHeaderOpacity.value == 0,
                   child: Opacity(
                     opacity: controller.smallHeaderOpacity.value,
-                    child: SmallHeader(title: controller.breed?.name ?? ''),
+                    child: SmallHeader(title: controller.subBreed?.name ?? ''),
                   ),
                 ),
               ),
@@ -81,40 +75,4 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
       ),
     );
   }
-}
-
-class _SubBreedsSection extends GetView<BreedDetailPageController> {
-  const _SubBreedsSection();
-
-  @override
-  Widget build(BuildContext context) => Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: CustomSpaceDimension.lg.value),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: CustomSpaceDimension.xl.value),
-            Text('Sub breeds', style: CustomText.h2.style),
-            SizedBox(height: CustomSpaceDimension.md.value),
-            Wrap(
-              spacing: CustomSpaceDimension.md.value,
-              children: controller.breed?.subBreeds
-                      .map(
-                        (subBreed) => GestureDetector(
-                          onTap: () => Get.toNamed(
-                            subBreedDetailRoute,
-                            parameters: {
-                              'breed_name': controller.breed?.name ?? '',
-                              'sub_breed_name': subBreed.name ?? '',
-                            },
-                          ),
-                          child: Chip(label: Text(subBreed.name ?? '')),
-                        ),
-                      )
-                      .toList() ??
-                  [],
-            ),
-          ],
-        ),
-      );
 }
