@@ -14,7 +14,7 @@ class SubBreedDetailPageController extends BreedDetailPageController {
       };
 
   BreedModel? get subBreed => breed?.subBreeds.firstWhereOrNull(
-        (element) => element.name == Get.parameters['sub_breed_name'],
+        (element) => element.id == Get.parameters['sub_breed'],
       );
 
   String get pageTitle => '${subBreed?.name ?? ''} (${breed?.name})';

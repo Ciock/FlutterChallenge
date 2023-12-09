@@ -8,6 +8,7 @@ import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
+import '../gallery/gallery.page.dart';
 import '../sub_breed_detail/sub_breed_detail.page.dart';
 import 'breed_detail.controller.dart';
 
@@ -54,8 +55,21 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                           horizontal: CustomSpaceDimension.lg.value,
                           vertical: CustomSpaceDimension.md.value,
                         ),
-                        child: CustomCard(
-                          child: DogImage(width: galleryImageWidth, url: url),
+                        child: GestureDetector(
+                          onTap: () => Get.toNamed(
+                            galleryRoute,
+                            parameters: {
+                              'image': url,
+                              'breed': controller.breed?.id ?? '',
+                            },
+                          ),
+                          child: Hero(
+                            tag: url,
+                            child: CustomCard(
+                              child:
+                                  DogImage(width: galleryImageWidth, url: url),
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -105,8 +119,8 @@ class _SubBreedsSection extends GetView<BreedDetailPageController> {
                           onTap: () => Get.toNamed(
                             subBreedDetailRoute,
                             parameters: {
-                              'breed_name': controller.breed?.name ?? '',
-                              'sub_breed_name': subBreed.name,
+                              'breed': controller.breed?.id ?? '',
+                              'sub_breed': subBreed.id ?? '',
                             },
                           ),
                           child: Chip(label: Text(subBreed.name)),

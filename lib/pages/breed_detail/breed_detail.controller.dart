@@ -15,7 +15,7 @@ class BreedDetailPageController extends GetxController {
   final smallHeaderOpacity = .0.obs;
 
   BreedModel? get breed => BreedService.to.breeds.firstWhereOrNull(
-        (element) => element.name == Get.parameters['breed_name'],
+        (element) => element.id == Get.parameters['breed'],
       );
 
   @override

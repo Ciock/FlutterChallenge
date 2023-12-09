@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../tokens/dimensions.token.dart';
 
 class ErrorImage extends StatelessWidget {
-  final double height;
+  final double? height;
 
-  const ErrorImage({super.key, required this.height});
+  const ErrorImage({super.key, this.height});
 
   @override
   Widget build(BuildContext context) => Stack(

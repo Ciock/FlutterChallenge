@@ -8,6 +8,7 @@ import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
+import '../gallery/gallery.page.dart';
 import 'sub_breed_detail.controller.dart';
 
 part 'sub_breed_detail.style.dart';
@@ -48,8 +49,22 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                           horizontal: CustomSpaceDimension.lg.value,
                           vertical: CustomSpaceDimension.md.value,
                         ),
-                        child: CustomCard(
-                          child: DogImage(width: galleryImageWidth, url: url),
+                        child: GestureDetector(
+                          onTap: () => Get.toNamed(
+                            galleryRoute,
+                            parameters: {
+                              'image': url,
+                              'breed': controller.breed?.id ?? '',
+                              'sub_breed': controller.subBreed?.id ?? '',
+                            },
+                          ),
+                          child: Hero(
+                            tag: url,
+                            child: CustomCard(
+                              child:
+                                  DogImage(width: galleryImageWidth, url: url),
+                            ),
+                          ),
                         ),
                       ),
                     ),
