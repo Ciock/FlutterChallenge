@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../design/tokens/colors.token.dart';
 import '../../../store/breed/breed.service.dart';
 
 class WelcomeAnimation extends StatefulWidget {
@@ -42,7 +43,7 @@ class _WelcomeAnimationState extends State<WelcomeAnimation> {
           child: Container(
             width: double.infinity,
             height: double.infinity,
-            color: Theme.of(context).scaffoldBackgroundColor,
+            color: CustomColors.background,
             child: Lottie.asset('assets/HomeAnimation.json'),
           ),
         ),

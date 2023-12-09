@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import 'design/tokens/colors.token.dart';
 import 'design/tokens/texts.token.dart';
 import 'pages/breed_detail/breed_detail.page.dart';
 import 'pages/gallery/gallery.page.dart';
@@ -32,10 +33,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: const Color(0xfff8f0e5),
+          scaffoldBackgroundColor: CustomColors.background,
           colorScheme: const ColorScheme.light().copyWith(
-            surface: const Color(0xfff4e9d6),
-            surfaceTint: const Color(0xfff4e3c8),
+            surface: CustomColors.surface,
+            surfaceTint: CustomColors.surfaceTint,
           ),
         ),
         getPages: [homePage, breedDetailPage, subBreedDetailPage, galleryPage],
