@@ -29,8 +29,9 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                 controller: controller.scrollController,
                 padding: EdgeInsets.zero,
                 children: [
+                  // @todo(ciock): use random image
                   ImageHeader(
-                    imageUrl: controller.subBreed?.image,
+                    imageUrl: controller.subBreed?.images.firstOrNull,
                     title: controller.subBreed?.name ?? '',
                   ),
                   if (controller.subBreed?.images.isNotEmpty == true) ...[

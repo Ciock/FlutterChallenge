@@ -7,6 +7,10 @@ import '../../store/breed/breed.model.dart';
 import '../../store/breed/breed.service.dart';
 
 class BreedDetailPageController extends GetxController {
+  void Function() get imageUpdate => () {
+        if (breed != null) BreedService.to.updateBreedImages(breed!);
+      };
+
   final scrollController = ScrollController();
   final smallHeaderOpacity = .0.obs;
 
@@ -31,6 +35,6 @@ class BreedDetailPageController extends GetxController {
   void onReady() {
     super.onReady();
 
-    if (breed != null) BreedService.to.updateBreedImages(breed!);
+    imageUpdate();
   }
 }
