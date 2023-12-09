@@ -41,7 +41,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 FocusScope.of(context).unfocus();
               },
               icon: const Icon(Icons.clear),
-            )
+            ),
         ],
       );
 }

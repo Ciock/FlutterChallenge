@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +29,17 @@ class GalleryPageWidget extends GetView<GalleryPageController> {
                       width: width,
                       fit: BoxFit.contain,
                       errorBuilder: (_, __, ___) => const ErrorImage(),
+                      loadingBuilder: (context, child, loadingProgress) =>
+                          loadingProgress == null
+                              ? child
+                              : Center(
+                                  child: CircularProgressIndicator(
+                                    value: imageLoadingProgressValue(
+                                      loadingProgress.cumulativeBytesLoaded,
+                                      loadingProgress.expectedTotalBytes,
+                                    ),
+                                  ),
+                                ),
                       image: ResizeImage(
                         NetworkImage(image),
                         width: width.toInt(),
@@ -52,4 +64,7 @@ class GalleryPageWidget extends GetView<GalleryPageController> {
       ),
     );
   }
+
+  double? imageLoadingProgressValue(int downloaded, int? total) =>
+      total != null ? clampDouble(downloaded / total, 0.1, 1) : null;
 }

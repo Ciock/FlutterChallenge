@@ -34,19 +34,40 @@ class HomePageWidget extends GetView<HomePageController> {
                   padding: EdgeInsets.only(top: CustomSpaceDimension.lg.value),
                   child: const Divider(height: 0),
                 ),
-                Expanded(
-                  child: Obx(
-                    () => ListView.separated(
-                      padding: EdgeInsets.symmetric(
-                        vertical: CustomSpaceDimension.lg.value,
+                Obx(
+                  () {
+                    if (controller.breeds.isEmpty) {
+                      return Center(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.all(CustomSpaceDimension.xl.value),
+                          child: const CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    if (controller.filteredBreeds.isEmpty) {
+                      return Center(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.all(CustomSpaceDimension.xl.value),
+                          child: const Text('No breed found'),
+                        ),
+                      );
+                    }
+
+                    return Expanded(
+                      child: ListView.separated(
+                        padding: EdgeInsets.symmetric(
+                          vertical: CustomSpaceDimension.lg.value,
+                        ),
+                        itemCount: controller.filteredBreeds.length,
+                        itemBuilder: (context, index) =>
+                            _BreedCard(controller.filteredBreeds[index]),
+                        separatorBuilder: (context, index) =>
+                            SizedBox(height: CustomSpaceDimension.lg.value),
                       ),
-                      itemCount: controller.filteredBreeds.length,
-                      itemBuilder: (context, index) =>
-                          _BreedCard(controller.filteredBreeds[index]),
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: CustomSpaceDimension.lg.value),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
