@@ -29,9 +29,14 @@ class ImageHeader extends StatelessWidget {
         Positioned(
           bottom: CustomSpaceDimension.lg.value,
           left: CustomSpaceDimension.lg.value,
-          child: Text(
-            title,
-            style: CustomText.h1.style.copyWith(color: Colors.white),
+          right: CustomSpaceDimension.lg.value,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              title,
+              style: CustomText.h1.style.copyWith(color: Colors.white),
+            ),
           ),
         ),
         Positioned(

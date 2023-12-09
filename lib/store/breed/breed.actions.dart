@@ -27,6 +27,14 @@ extension BreedActions on BreedService {
         (response.data['message'] as List).map((e) => e.toString()).toList();
   }
 
+  Future<void> updateSubBreedImage(BreedModel subBreed, String breedId) async {
+    if (subBreed.id == null) return;
+
+    final response = await _breedApi.tryGetSubBreedImage(subBreed.id!, breedId);
+
+    subBreed.image = response.data['message'];
+  }
+
   Future<void> updateSubBreedImages(BreedModel subBreed, String breedId) async {
     if (subBreed.id == null) return;
 

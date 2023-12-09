@@ -29,10 +29,9 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                 controller: controller.scrollController,
                 padding: EdgeInsets.zero,
                 children: [
-                  // @todo(ciock): use random image
                   ImageHeader(
-                    imageUrl: controller.subBreed?.images.firstOrNull,
-                    title: controller.subBreed?.name ?? '',
+                    imageUrl: controller.subBreed?.image,
+                    title: controller.pageTitle,
                   ),
                   if (controller.subBreed?.images.isNotEmpty == true) ...[
                     Padding(
@@ -67,7 +66,7 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                   ignoring: controller.smallHeaderOpacity.value == 0,
                   child: Opacity(
                     opacity: controller.smallHeaderOpacity.value,
-                    child: SmallHeader(title: controller.subBreed?.name ?? ''),
+                    child: SmallHeader(title: controller.pageTitle),
                   ),
                 ),
               ),

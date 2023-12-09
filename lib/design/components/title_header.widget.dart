@@ -25,9 +25,13 @@ class SmallHeader extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(
-                title,
-                style: CustomText.h1.style,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  title,
+                  style: CustomText.h1.style,
+                ),
               ),
             ),
             IconButton(

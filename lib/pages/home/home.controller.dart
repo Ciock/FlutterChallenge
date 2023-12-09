@@ -9,7 +9,10 @@ class HomePageController extends GetxController {
   final searchText = RxString('');
 
   List<BreedModel> get filteredBreeds => breeds
-      .where((element) => element.name.contains(searchText.value))
+      .where(
+        (element) =>
+            element.name.toLowerCase().contains(searchText.value.toLowerCase()),
+      )
       .toList();
   List<BreedModel> get breeds => BreedService.to.breeds;
 

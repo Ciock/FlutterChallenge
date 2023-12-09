@@ -8,6 +8,7 @@ class SubBreedDetailPageController extends BreedDetailPageController {
   @override
   void Function() get imageUpdate => () {
         if (breed?.id != null && subBreed != null) {
+          BreedService.to.updateSubBreedImage(subBreed!, breed!.id!);
           BreedService.to.updateSubBreedImages(subBreed!, breed!.id!);
         }
       };
@@ -15,4 +16,6 @@ class SubBreedDetailPageController extends BreedDetailPageController {
   BreedModel? get subBreed => breed?.subBreeds.firstWhereOrNull(
         (element) => element.name == Get.parameters['sub_breed_name'],
       );
+
+  String get pageTitle => '${subBreed?.name ?? ''} (${breed?.name})';
 }
