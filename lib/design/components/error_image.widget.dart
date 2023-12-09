@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../tokens/dimensions.token.dart';
 
@@ -19,8 +20,8 @@ class ErrorImage extends StatelessWidget {
             top: CustomSpaceDimension.md.value,
             left: 0,
             right: 0,
-            child: const Text(
-              'Image not found',
+            child: Text(
+              'Image not found'.tr,
               textAlign: TextAlign.center,
             ),
           ),

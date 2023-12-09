@@ -26,7 +26,7 @@ class HomePageWidget extends GetView<HomePageController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: CustomSpaceDimension.md.value),
-                    Text('Breeds', style: CustomText.h1.style),
+                    Text('Breeds'.tr, style: CustomText.h1.style),
                     SizedBox(height: CustomSpaceDimension.lg.value),
                     CustomSearchBar(controller: controller.searchController),
                     Padding(
@@ -41,7 +41,7 @@ class HomePageWidget extends GetView<HomePageController> {
                             child: Padding(
                               padding:
                                   EdgeInsets.all(CustomSpaceDimension.xl.value),
-                              child: const Text('No breed found'),
+                              child: Text('No breed found'.tr),
                             ),
                           );
                         }

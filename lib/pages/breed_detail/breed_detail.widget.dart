@@ -51,7 +51,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                             MediaQuery.of(context).padding.right,
                         top: CustomSpaceDimension.xl.value,
                       ),
-                      child: Text('Gallery', style: CustomText.h2.style),
+                      child: Text('Gallery'.tr, style: CustomText.h2.style),
                     ),
                     ...controller.breed!.images.map(
                       (url) => Padding(
@@ -115,7 +115,7 @@ class _SubBreedsSection extends GetView<BreedDetailPageController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: CustomSpaceDimension.xl.value),
-            Text('Sub breeds', style: CustomText.h2.style),
+            Text('Sub breeds'.tr, style: CustomText.h2.style),
             SizedBox(height: CustomSpaceDimension.md.value),
             Wrap(
               spacing: CustomSpaceDimension.md.value,

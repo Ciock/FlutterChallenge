@@ -49,7 +49,7 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                             MediaQuery.of(context).padding.right,
                         top: CustomSpaceDimension.xl.value,
                       ),
-                      child: Text('Gallery', style: CustomText.h2.style),
+                      child: Text('Gallery'.tr, style: CustomText.h2.style),
                     ),
                     ...controller.subBreed!.images.map(
                       (url) => Padding(

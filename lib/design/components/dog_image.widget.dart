@@ -26,20 +26,19 @@ class DogImage extends StatelessWidget {
       height: height,
       fit: BoxFit.cover,
       errorBuilder: (_, __, ___) => ErrorImage(height: height),
-      loadingBuilder: (context, child, loadingProgress) =>
-          loadingProgress == null
-              ? child
-              : SizedBox(
-                  height: height,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      value: imageLoadingProgressValue(
-                        loadingProgress.cumulativeBytesLoaded,
-                        loadingProgress.expectedTotalBytes,
-                      ),
-                    ),
+      loadingBuilder: (_, child, loadingProgress) => loadingProgress == null
+          ? child
+          : SizedBox(
+              height: height,
+              child: Center(
+                child: CircularProgressIndicator(
+                  value: imageLoadingProgressValue(
+                    loadingProgress.cumulativeBytesLoaded,
+                    loadingProgress.expectedTotalBytes,
                   ),
                 ),
+              ),
+            ),
       image: ResizeImage(
         NetworkImage(url),
         width: width.toInt(),

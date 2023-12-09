@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../tokens/constants.token.dart';
 import '../tokens/texts.token.dart';
@@ -30,7 +31,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   Widget build(BuildContext context) => SearchBar(
         controller: widget.controller,
         textStyle: MaterialStateProperty.all(CustomText.body.style),
-        hintText: 'Search...',
+        hintText: 'Search...'.tr,
         elevation: const MaterialStatePropertyAll(Constants.elevation),
         leading: const Icon(Icons.search),
         trailing: [

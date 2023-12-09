@@ -9,6 +9,7 @@ import 'pages/gallery/gallery.page.dart';
 import 'pages/home/home.page.dart';
 import 'pages/sub_breed_detail/sub_breed_detail.page.dart';
 import 'store/breed/breed.service.dart';
+import 'utils/translations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +17,8 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  Get.locale = Get.deviceLocale;
 
   initServices();
 
@@ -32,6 +35,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        translations: AppTranslations(),
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: CustomColors.background,
           colorScheme: const ColorScheme.light().copyWith(
