@@ -29,7 +29,7 @@ class HomePageWidget extends GetView<HomePageController> {
                 SizedBox(height: CustomSpaceDimension.md.value),
                 Text('Breeds', style: CustomText.h1.style),
                 SizedBox(height: CustomSpaceDimension.lg.value),
-                CustomSearchBar(controller: controller),
+                CustomSearchBar(controller: controller.searchController),
                 Padding(
                   padding: EdgeInsets.only(top: CustomSpaceDimension.lg.value),
                   child: const Divider(height: 0),
