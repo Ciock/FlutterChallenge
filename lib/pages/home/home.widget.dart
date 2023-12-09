@@ -41,15 +41,6 @@ class HomePageWidget extends GetView<HomePageController> {
                     ),
                     Obx(
                       () {
-                        if (controller.breeds.isEmpty) {
-                          return Center(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.all(CustomSpaceDimension.xl.value),
-                              child: const CircularProgressIndicator(),
-                            ),
-                          );
-                        }
                         if (controller.filteredBreeds.isEmpty) {
                           return Center(
                             child: Padding(
@@ -97,11 +88,19 @@ class _WelcomeAnimationState extends State<_WelcomeAnimation> {
   @override
   void initState() {
     super.initState();
+    setAnimationRemove();
+  }
 
-    Future.delayed(const Duration(seconds: 3)).then((value) {
-      setState(() {
-        opacity = 0;
-      });
+  Future setAnimationRemove() async {
+    // show animation until breed list is retrieved.
+    // show animation for at least 2 seconds
+    await Future.wait([
+      BreedService.to.breeds$.first,
+      Future.delayed(const Duration(seconds: 2)),
+    ]);
+
+    setState(() {
+      opacity = 0;
     });
   }
 

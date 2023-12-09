@@ -12,6 +12,7 @@ class BreedService extends GetxService {
 
   BreedService({BreedApi? breedApi}) : _breedApi = breedApi ?? BreedApi();
 
+  Stream<List<BreedModel>> get breeds$ => _breeds.stream;
   List<BreedModel> get breeds => _breeds;
   final _breeds = <BreedModel>[].obs;
 
