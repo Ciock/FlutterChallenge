@@ -7,6 +7,7 @@ import '../../design/components/image_header.widget.dart';
 import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
+import '../../store/breed/breed.model.dart';
 import 'sub_breed_detail.controller.dart';
 
 part 'sub_breed_detail.style.dart';
@@ -29,7 +30,7 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                 padding: EdgeInsets.zero,
                 children: [
                   ImageHeader(
-                    imageUrl: controller.subBreed?.image.value,
+                    imageUrl: controller.subBreed?.image,
                     title: controller.subBreed?.name ?? '',
                   ),
                   if (controller.subBreed?.images.isNotEmpty == true) ...[

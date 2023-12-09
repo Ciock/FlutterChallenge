@@ -11,19 +11,19 @@ extension BreedActions on BreedService {
   }
 
   Future<void> updateBreedImage(BreedModel breed) async {
-    if (breed.name == null) return;
+    if (breed.id == null) return;
 
-    final response = await _breedApi.tryGetBreedImage(breed.name!);
+    final response = await _breedApi.tryGetBreedImage(breed.id!);
 
-    breed.image.value = response.data['message'];
+    breed.image = response.data['message'];
   }
 
   Future<void> updateBreedImages(BreedModel breed) async {
-    if (breed.name == null) return;
+    if (breed.id == null) return;
 
-    final response = await _breedApi.tryGetBreedImages(breed.name!);
+    final response = await _breedApi.tryGetBreedImages(breed.id!);
 
-    breed.images.value =
+    breed.images =
         (response.data['message'] as List).map((e) => e.toString()).toList();
   }
 }

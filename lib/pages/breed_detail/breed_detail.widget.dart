@@ -7,6 +7,7 @@ import '../../design/components/image_header.widget.dart';
 import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
+import '../../store/breed/breed.model.dart';
 import '../sub_breed_detail/sub_breed_detail.page.dart';
 import 'breed_detail.controller.dart';
 
@@ -32,7 +33,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                   Hero(
                     tag: controller.breed?.name ?? '',
                     child: ImageHeader(
-                      imageUrl: controller.breed?.image.value,
+                      imageUrl: controller.breed?.image,
                       title: controller.breed?.name ?? '',
                     ),
                   ),
@@ -105,10 +106,10 @@ class _SubBreedsSection extends GetView<BreedDetailPageController> {
                             subBreedDetailRoute,
                             parameters: {
                               'breed_name': controller.breed?.name ?? '',
-                              'sub_breed_name': subBreed.name ?? '',
+                              'sub_breed_name': subBreed.name,
                             },
                           ),
-                          child: Chip(label: Text(subBreed.name ?? '')),
+                          child: Chip(label: Text(subBreed.name)),
                         ),
                       )
                       .toList() ??

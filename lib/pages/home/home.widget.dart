@@ -64,14 +64,14 @@ class _BreedCard extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.toNamed(
           breedDetailRoute,
-          parameters: {'breed_name': breed.name ?? ''},
+          parameters: {'breed_name': breed.name},
         ),
         child: Hero(
-          tag: breed.name ?? '',
+          tag: breed.name,
           child: CustomCard(
             child: Obx(
               () {
-                if (breed.image.value == null) {
+                if (breed.image == null) {
                   BreedService.to.updateBreedImage(breed);
                 }
                 final imageWidth = MediaQuery.of(context).size.width;
@@ -80,14 +80,14 @@ class _BreedCard extends StatelessWidget {
 
                 return Stack(
                   children: [
-                    if (breed.image.value != null)
-                      DogImage(width: imageWidth, url: breed.image.value!),
+                    if (breed.image != null)
+                      DogImage(width: imageWidth, url: breed.image!),
                     GradientBox(height: imageHeight),
                     Positioned(
                       bottom: CustomSpaceDimension.lg.value,
                       left: CustomSpaceDimension.lg.value,
                       child: Text(
-                        breed.name?.capitalize ?? '',
+                        breed.name,
                         style:
                             CustomText.body.style.copyWith(color: Colors.white),
                       ),

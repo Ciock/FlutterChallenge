@@ -9,7 +9,7 @@ class HomePageController extends GetxController {
   final searchText = RxString('');
 
   List<BreedModel> get filteredBreeds => breeds
-      .where((element) => element.name?.contains(searchText.value) ?? false)
+      .where((element) => element.name.contains(searchText.value))
       .toList();
   List<BreedModel> get breeds => BreedService.to.breeds;
 

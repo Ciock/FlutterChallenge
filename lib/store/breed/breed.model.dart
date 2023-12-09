@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 
-class BreedModel {
-  String? name;
-  List<BreedModel> subBreeds;
-  final image = RxnString();
-  final images = RxList<String>();
+part 'breed.selectors.dart';
 
-  BreedModel({this.subBreeds = const [], this.name});
+class BreedModel {
+  String? id;
+  List<BreedModel> subBreeds;
+  final _image = RxnString();
+  final _images = RxList<String>();
+
+  BreedModel({this.subBreeds = const [], this.id});
 
   factory BreedModel.fromGetBreedsResponse(MapEntry<dynamic, dynamic> data) =>
       BreedModel()..updateFromGetBreedsResponse(data);
@@ -14,9 +16,8 @@ class BreedModel {
 
 extension _UpdateFromApiResponse on BreedModel {
   void updateFromGetBreedsResponse(MapEntry<dynamic, dynamic> data) {
-    name = data.key;
-    subBreeds = (data.value as List)
-        .map((e) => BreedModel(name: e.toString()))
-        .toList();
+    id = data.key;
+    subBreeds =
+        (data.value as List).map((e) => BreedModel(id: e.toString())).toList();
   }
 }
