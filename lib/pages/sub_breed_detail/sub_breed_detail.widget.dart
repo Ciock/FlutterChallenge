@@ -8,8 +8,10 @@ import '../../design/components/title_header.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
+import '../breed_detail/breed_detail.page.dart';
 import '../gallery/gallery.page.dart';
 import 'sub_breed_detail.controller.dart';
+import 'sub_breed_detail.page.dart';
 
 part 'sub_breed_detail.style.dart';
 
@@ -60,9 +62,11 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                           onTap: () => Get.toNamed(
                             galleryRoute,
                             parameters: {
-                              'image': url,
-                              'breed': controller.breed?.id ?? '',
-                              'sub_breed': controller.subBreed?.id ?? '',
+                              GalleryParameters.image.name: url,
+                              BreedDetailParameters.breed.name:
+                                  controller.breed?.id ?? '',
+                              SubBreedDetailParameters.subBreed.name:
+                                  controller.subBreed?.id ?? '',
                             },
                           ),
                           child: Hero(

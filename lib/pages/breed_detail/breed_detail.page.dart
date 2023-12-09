@@ -11,6 +11,8 @@ final breedDetailPage = GetPage(
 
 const breedDetailRoute = 'breedDetail';
 
+enum BreedDetailParameters { breed }
+
 class BreedDetailPageBinding extends Bindings {
   @override
   void dependencies() {

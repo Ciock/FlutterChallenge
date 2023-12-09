@@ -11,6 +11,7 @@ import '../../store/breed/breed.model.dart';
 import '../gallery/gallery.page.dart';
 import '../sub_breed_detail/sub_breed_detail.page.dart';
 import 'breed_detail.controller.dart';
+import 'breed_detail.page.dart';
 
 part 'breed_detail.style.dart';
 
@@ -64,7 +65,8 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                             galleryRoute,
                             parameters: {
                               'image': url,
-                              'breed': controller.breed?.id ?? '',
+                              BreedDetailParameters.breed.name:
+                                  controller.breed?.id ?? '',
                             },
                           ),
                           child: Hero(
@@ -123,8 +125,10 @@ class _SubBreedsSection extends GetView<BreedDetailPageController> {
                           onTap: () => Get.toNamed(
                             subBreedDetailRoute,
                             parameters: {
-                              'breed': controller.breed?.id ?? '',
-                              'sub_breed': subBreed.id ?? '',
+                              BreedDetailParameters.breed.name:
+                                  controller.breed?.id ?? '',
+                              SubBreedDetailParameters.subBreed.name:
+                                  subBreed.id ?? '',
                             },
                           ),
                           child: Chip(label: Text(subBreed.name)),

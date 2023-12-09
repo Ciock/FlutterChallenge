@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../store/breed/breed.model.dart';
 import '../../store/breed/breed.service.dart';
+import 'breed_detail.page.dart';
 
 class BreedDetailPageController extends GetxController {
   void Function() get imageUpdate => () {
@@ -15,7 +16,8 @@ class BreedDetailPageController extends GetxController {
   final smallHeaderOpacity = .0.obs;
 
   BreedModel? get breed => BreedService.to.breeds.firstWhereOrNull(
-        (element) => element.id == Get.parameters['breed'],
+        (element) =>
+            element.id == Get.parameters[BreedDetailParameters.breed.name],
       );
 
   @override

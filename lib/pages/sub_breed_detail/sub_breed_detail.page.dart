@@ -11,6 +11,8 @@ final subBreedDetailPage = GetPage(
 
 const subBreedDetailRoute = 'subBreedDetail';
 
+enum SubBreedDetailParameters { subBreed }
+
 class SubBreedDetailPageBinding extends Bindings {
   @override
   void dependencies() {

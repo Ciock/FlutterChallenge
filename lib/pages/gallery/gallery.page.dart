@@ -11,6 +11,8 @@ final galleryPage = GetPage(
 
 const galleryRoute = 'gallery';
 
+enum GalleryParameters { image }
+
 class GalleryPageBinding extends Bindings {
   @override
   void dependencies() {

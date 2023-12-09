@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/breed_detail/breed_detail.page.dart';
 import '../../pages/gallery/gallery.page.dart';
+import '../../pages/sub_breed_detail/sub_breed_detail.page.dart';
 import '../../store/breed/breed.model.dart';
 import '../atoms/gradient.widget.dart';
 import '../tokens/dimensions.token.dart';
@@ -34,9 +36,9 @@ class ImageHeader extends StatelessWidget {
             onTap: () => Get.toNamed(
               galleryRoute,
               parameters: {
-                'image': imageUrl ?? '',
-                'breed': breed?.id ?? '',
-                'sub_breed': breed?.id ?? '',
+                GalleryParameters.image.name: imageUrl ?? '',
+                BreedDetailParameters.breed.name: breed?.id ?? '',
+                SubBreedDetailParameters.subBreed.name: breed?.id ?? '',
               },
             ),
             child: DogImage(

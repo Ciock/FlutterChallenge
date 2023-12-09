@@ -64,7 +64,7 @@ class _BreedCard extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: () => Get.toNamed(
           breedDetailRoute,
-          parameters: {'breed': breed.id ?? ''},
+          parameters: {BreedDetailParameters.breed.name: breed.id ?? ''},
         ),
         child: Hero(
           tag: breed.name,
