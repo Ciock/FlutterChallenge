@@ -43,8 +43,10 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                   if (controller.breed?.images.isNotEmpty == true) ...[
                     Padding(
                       padding: EdgeInsets.only(
-                        left: CustomSpaceDimension.lg.value,
-                        right: CustomSpaceDimension.lg.value,
+                        left: CustomSpaceDimension.lg.value +
+                            MediaQuery.of(context).padding.left,
+                        right: CustomSpaceDimension.lg.value +
+                            MediaQuery.of(context).padding.right,
                         top: CustomSpaceDimension.xl.value,
                       ),
                       child: Text('Gallery', style: CustomText.h2.style),
@@ -52,7 +54,8 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                     ...controller.breed!.images.map(
                       (url) => Padding(
                         padding: EdgeInsets.symmetric(
-                          horizontal: CustomSpaceDimension.lg.value,
+                          horizontal: CustomSpaceDimension.lg.value +
+                              MediaQuery.of(context).padding.right,
                           vertical: CustomSpaceDimension.md.value,
                         ),
                         child: GestureDetector(

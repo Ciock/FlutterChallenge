@@ -19,8 +19,10 @@ class SmallHeader extends StatelessWidget {
           top: MediaQuery.of(context).padding.top +
               CustomSpaceDimension.lg.value,
           bottom: CustomSpaceDimension.lg.value,
-          right: CustomSpaceDimension.lg.value,
-          left: CustomSpaceDimension.lg.value,
+          right: CustomSpaceDimension.lg.value +
+              MediaQuery.of(context).padding.right,
+          left: CustomSpaceDimension.lg.value +
+              MediaQuery.of(context).padding.left,
         ),
         child: Row(
           children: [

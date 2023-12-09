@@ -40,7 +40,8 @@ class ImageHeader extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: CustomSpaceDimension.lg.value,
+          right: CustomSpaceDimension.lg.value +
+              MediaQuery.of(context).padding.right,
           top: CustomSpaceDimension.lg.value +
               MediaQuery.of(context).padding.top,
           child: IconButton(
