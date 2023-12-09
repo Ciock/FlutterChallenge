@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../design/atoms/card.widget.dart';
 import '../../design/atoms/gradient.widget.dart';
-import '../../design/components/error_image.widget.dart';
+import '../../design/components/dog_image.widget.dart';
 import '../../design/components/search_bar.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
@@ -81,17 +81,7 @@ class _BreedCard extends StatelessWidget {
                 return Stack(
                   children: [
                     if (breed.image.value != null)
-                      Image(
-                        width: imageWidth,
-                        height: imageHeight,
-                        fit: BoxFit.cover,
-                        errorBuilder: (_, __, ___) =>
-                            ErrorImage(height: imageHeight),
-                        image: ResizeImage(
-                          NetworkImage(breed.image.value!),
-                          width: imageWidth.toInt(),
-                        ),
-                      ),
+                      DogImage(width: imageWidth, url: breed.image.value!),
                     GradientBox(height: imageHeight),
                     Positioned(
                       bottom: CustomSpaceDimension.lg.value,

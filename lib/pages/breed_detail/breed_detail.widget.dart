@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../design/atoms/card.widget.dart';
 import '../../design/atoms/gradient.widget.dart';
-import '../../design/components/error_image.widget.dart';
+import '../../design/components/dog_image.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import '../../design/tokens/texts.token.dart';
 import '../../store/breed/breed.model.dart';
@@ -17,8 +17,6 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
   @override
   Widget build(BuildContext context) {
     final galleryImageWidth = MediaQuery.of(context).size.width;
-    final galleryImageHeight =
-        galleryImageWidth / CustomRatioDimension.wide.value;
 
     return Scaffold(
       body: SafeArea(
@@ -42,29 +40,16 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                       padding: EdgeInsets.symmetric(
                         horizontal: CustomSpaceDimension.lg.value,
                       ),
-                      child: Text(
-                        'Gallery',
-                        style: CustomText.h2.style,
-                      ),
+                      child: Text('Gallery', style: CustomText.h2.style),
                     ),
                     ...controller.breed!.images.map(
-                      (element) => Padding(
+                      (url) => Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: CustomSpaceDimension.lg.value,
                           vertical: CustomSpaceDimension.md.value,
                         ),
                         child: CustomCard(
-                          child: Image(
-                            width: galleryImageWidth,
-                            height: galleryImageHeight,
-                            fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) =>
-                                ErrorImage(height: galleryImageHeight),
-                            image: ResizeImage(
-                              NetworkImage(element),
-                              width: galleryImageWidth.toInt(),
-                            ),
-                          ),
+                          child: DogImage(width: galleryImageWidth, url: url),
                         ),
                       ),
                     ),
@@ -78,7 +63,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
               right: 0,
               child: Obx(
                 () => IgnorePointer(
-                  ignoring: controller.smallHeaderOpacity.value < 1,
+                  ignoring: controller.smallHeaderOpacity.value == 0,
                   child: Opacity(
                     opacity: controller.smallHeaderOpacity.value,
                     child: _SmallHeader(breed: controller.breed),
@@ -98,17 +83,13 @@ class _SubBreedsSection extends GetView<BreedDetailPageController> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: CustomSpaceDimension.lg.value,
-        ),
+        padding:
+            EdgeInsets.symmetric(horizontal: CustomSpaceDimension.lg.value),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: CustomSpaceDimension.xl.value),
-            Text(
-              'Sub breeds',
-              style: CustomText.h2.style,
-            ),
+            Text('Sub breeds', style: CustomText.h2.style),
             SizedBox(height: CustomSpaceDimension.md.value),
             Wrap(
               spacing: CustomSpaceDimension.md.value,
@@ -171,15 +152,10 @@ class _ImageHeader extends StatelessWidget {
 
     return Stack(
       children: [
-        Image(
+        DogImage(
           width: width,
-          height: height,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => ErrorImage(height: height),
-          image: ResizeImage(
-            NetworkImage(breed!.image.value!),
-            width: width.toInt(),
-          ),
+          url: breed!.image.value!,
+          ratio: CustomRatioDimension.tall,
         ),
         GradientBox(height: height),
         Positioned(
