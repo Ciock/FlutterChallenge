@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'design/tokens/texts.token.dart';
@@ -8,8 +9,15 @@ import 'pages/home/home.page.dart';
 import 'pages/sub_breed_detail/sub_breed_detail.page.dart';
 import 'store/breed/breed.service.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   initServices();
+
   runApp(const MainApp());
 }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../store/breed/breed.model.dart';
@@ -21,9 +22,26 @@ class GalleryPageController extends GetxController {
   void onInit() {
     super.onInit();
 
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     final initalImage = Get.parameters['image'];
     if (initalImage != null) {
       pageController = PageController(initialPage: images.indexOf(initalImage));
     }
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 }
