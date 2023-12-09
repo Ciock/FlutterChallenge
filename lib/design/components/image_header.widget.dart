@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/gallery/gallery.page.dart';
+import '../../store/breed/breed.model.dart';
 import '../atoms/gradient.widget.dart';
 import '../tokens/dimensions.token.dart';
 import '../tokens/texts.token.dart';
@@ -9,8 +11,16 @@ import 'dog_image.widget.dart';
 class ImageHeader extends StatelessWidget {
   final String? imageUrl;
   final String title;
+  final BreedModel? breed;
+  final BreedModel? subBreed;
 
-  const ImageHeader({super.key, required this.imageUrl, required this.title});
+  const ImageHeader({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    this.breed,
+    this.subBreed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +30,20 @@ class ImageHeader extends StatelessWidget {
     return Stack(
       children: [
         if (imageUrl != null)
-          DogImage(
-            width: width,
-            url: imageUrl!,
-            ratio: CustomRatioDimension.tall,
+          GestureDetector(
+            onTap: () => Get.toNamed(
+              galleryRoute,
+              parameters: {
+                'image': imageUrl ?? '',
+                'breed': breed?.id ?? '',
+                'sub_breed': breed?.id ?? '',
+              },
+            ),
+            child: DogImage(
+              width: width,
+              url: imageUrl!,
+              ratio: CustomRatioDimension.tall,
+            ),
           ),
         GradientBox(height: height),
         Positioned(

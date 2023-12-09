@@ -36,6 +36,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                     child: ImageHeader(
                       imageUrl: controller.breed?.image,
                       title: controller.breed?.name ?? '',
+                      breed: controller.breed,
                     ),
                   ),
                   if (controller.breed?.subBreeds.isNotEmpty == true)

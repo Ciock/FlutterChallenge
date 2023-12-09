@@ -35,6 +35,8 @@ class SubBreedDetailPageWidget extends GetView<SubBreedDetailPageController> {
                   ImageHeader(
                     imageUrl: controller.subBreed?.image,
                     title: controller.pageTitle,
+                    breed: controller.breed,
+                    subBreed: controller.subBreed,
                   ),
                   if (controller.subBreed?.images.isNotEmpty == true) ...[
                     Padding(
