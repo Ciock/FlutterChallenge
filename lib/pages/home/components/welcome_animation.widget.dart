@@ -5,6 +5,8 @@ import '../../../design/tokens/colors.token.dart';
 import '../../../store/breed/breed.service.dart';
 
 class WelcomeAnimation extends StatefulWidget {
+  static const animationMinDuration = Duration(seconds: 2);
+
   const WelcomeAnimation({super.key});
 
   @override
@@ -25,7 +27,7 @@ class _WelcomeAnimationState extends State<WelcomeAnimation> {
     // show animation for at least 2 seconds
     await Future.wait([
       BreedService.to.breeds$.first,
-      Future.delayed(const Duration(seconds: 2)),
+      Future.delayed(WelcomeAnimation.animationMinDuration),
     ]);
 
     setState(() {
