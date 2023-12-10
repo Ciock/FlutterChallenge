@@ -41,7 +41,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
                     ),
                   ),
                   if (controller.breed?.subBreeds.isNotEmpty == true)
-                    const _SubBreedsSection(),
+                    const SubBreedsSection(),
                   if (controller.breed?.images.isNotEmpty == true) ...[
                     Padding(
                       padding: EdgeInsets.only(
@@ -104,8 +104,8 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
   }
 }
 
-class _SubBreedsSection extends GetView<BreedDetailPageController> {
-  const _SubBreedsSection();
+class SubBreedsSection extends GetView<BreedDetailPageController> {
+  const SubBreedsSection();
 
   @override
   Widget build(BuildContext context) => Padding(

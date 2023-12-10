@@ -8,4 +8,5 @@ extension BreedSelectors on BreedModel {
 
   set images(List<String> value) => _images.value = value;
   List<String> get images => _images;
+  Stream<List<String>> get images$ => _images.stream;
 }
