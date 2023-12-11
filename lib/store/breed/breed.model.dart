@@ -12,6 +12,13 @@ class BreedModel {
 
   factory BreedModel.fromGetBreedsResponse(MapEntry<dynamic, dynamic> data) =>
       BreedModel()..updateFromGetBreedsResponse(data);
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'subBreeds': subBreeds.map((e) => e.toJson()).toList(),
+        'image': image.toString(),
+        'images': images,
+      };
 }
 
 extension _UpdateFromApiResponse on BreedModel {

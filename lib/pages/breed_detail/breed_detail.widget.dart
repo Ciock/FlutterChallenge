@@ -105,7 +105,7 @@ class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
 }
 
 class SubBreedsSection extends GetView<BreedDetailPageController> {
-  const SubBreedsSection();
+  const SubBreedsSection({super.key});
 
   @override
   Widget build(BuildContext context) => Padding(
