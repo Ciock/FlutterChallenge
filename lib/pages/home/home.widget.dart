@@ -8,8 +8,6 @@ import 'components/breed_card.widget.dart';
 import 'components/welcome_animation.widget.dart';
 import 'home.controller.dart';
 
-part 'home.style.dart';
-
 class HomePageWidget extends GetView<HomePageController> {
   const HomePageWidget({super.key});
 

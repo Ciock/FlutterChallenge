@@ -13,8 +13,6 @@ import '../sub_breed_detail/sub_breed_detail.page.dart';
 import 'breed_detail.controller.dart';
 import 'breed_detail.page.dart';
 
-part 'breed_detail.style.dart';
-
 class BreedDetailPageWidget extends GetView<BreedDetailPageController> {
   const BreedDetailPageWidget({super.key});
 

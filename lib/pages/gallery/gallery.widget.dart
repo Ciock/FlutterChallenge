@@ -6,8 +6,6 @@ import '../../design/components/error_image.widget.dart';
 import '../../design/tokens/dimensions.token.dart';
 import 'gallery.controller.dart';
 
-part 'gallery.style.dart';
-
 class GalleryPageWidget extends GetView<GalleryPageController> {
   const GalleryPageWidget({super.key});
 
