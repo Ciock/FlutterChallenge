@@ -2,7 +2,7 @@
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+Here are a few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
@@ -13,7 +13,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Code Generation
 
-We use [Mason](https://pub.dev/packages/mason_cli "Mason") to generate clean code easily. You can referer to the package complete [documentation](https://docs.brickhub.dev/).
+We use [Mason](https://pub.dev/packages/mason_cli "Mason") to generate clean code easily. You can refer to the package complete [documentation](https://docs.brickhub.dev/).
 
 You can use the page template in this way:
 
@@ -24,7 +24,7 @@ You can use the page template in this way:
 dart pub global activate mason_cli
 ```
 
-Now you can call `mason` command in terminal
+Now you can call the `mason` command in the terminal
 
 ### 2. Generate a page
 
@@ -54,25 +54,25 @@ Insert the name of the page, and you're done 🎉
 
 State management: [Get](https://pub.dev/packages/get)
 
-A Store is where data and app state is reteined.
+A Store is where data and app state are retained.
 
 ### Services
 
-App level state and data reside in /lib/store in ***.service** file.
+App-level state and data reside in /lib/store in ***.service** file.
 
-Services are initialized at the start of the app and can be retrieved from everywhere with the `ServiceClassName.to` method.
+Services are initialized at the app's start and can be retrieved from everywhere with the `ServiceClassName.to` method.
 
 ### Model
 
-A Service is often bound to a Model that usually matches a database object.
+A Service is often bound to a Model that matches a database object.
 
-> Ex. BreedService store data about BreedModel, like the list of breeds.
+> Ex. BreedService stores data about BreedModel, like the list of breeds.
 
-A Model contains methods to transform json data to class object.
+A Model contains methods to transform JSON data to the class object.
 
 #### Selector
 
-a .selector file helps to keep model's file clean and to keep variables privates.
+A .selector file helps to keep the model's file clean and to keep variables private.
 
 ### Api
 
@@ -90,7 +90,7 @@ App routes.
 
 ### Page
 
-a .page file contains the route definition and Binding with the Controller.
+A .page file contains the route definition and Binding with the Controller.
 
 When calling `Get.toNamed` the Controller is automatically initialized.
 
@@ -98,17 +98,17 @@ When calling `Get.toNamed` the Controller is automatically initialized.
 
 The Controller is responsible for the page logic.
 
-The Controller is similar to a Service, but it's responsable only for its page and gets created and destroyed with it. It retrieves data from Services for the Widget, and makes API calls through Service's Actions.
+The Controller is similar to a Service, but it's responsible only for its page and gets created and destroyed with it. It retrieves data from Services for the Widget and makes API calls through Service's Actions.
 
 ### Widget
 
-High level widget that defines Page layout and content.
+High-level widget that defines Page layout and content.
 
-Widget content is reactivily updated using [Obx](https://pub.dev/packages/get#counter-app-with-getx) Widget
+Widget content is reactively updated using [Obx](https://pub.dev/packages/get#counter-app-with-getx) Widget
 
 ## Design
 
-Low level widgets and UI tokens
+Low-level widgets and UI tokens
 
 ### Tokens
 
@@ -118,13 +118,13 @@ Design tokens point to style values like colors, fonts, and measurements
 
 ### Atoms
 
-Lowest level widgets like structure widgets and buttons.
+Lowest-level widgets like structure widgets and buttons.
 
 [Atomic Design](https://atomicdesign.bradfrost.com/chapter-2/)
 
 ### Components
 
-Medium level widgets that are composed by many lower level widgets.
+Medium-level widgets are composed of many lower-level widgets.
 
 ## Utils
 
@@ -132,8 +132,8 @@ Medium level widgets that are composed by many lower level widgets.
 
 Get package is used for [translations](https://atomicdesign.bradfrost.com/chapter-2/)
 
-*.translations file are used where a string need to be translated.
+*.translations files are used where a string needs to be translated.
 
-all .translations file are then merged together in utils/translations.dart.
+All .translations files are then merged in utils/translations.dart.
 
-> This could led to some repetition and overwriting, but it keeps translations organized and easier to track.
+> This could lead to some repetition and overwriting, but it keeps translations organized and easier to track.
